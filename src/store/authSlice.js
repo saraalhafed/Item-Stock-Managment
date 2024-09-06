@@ -16,13 +16,13 @@ const authSlice=createSlice({
     initialState,
     reducers:{
           auth(state,action){         /* from postman can i check what i have in the respons than i take what i want to show in my app ,to update my state */
-            state.token =action.payload.token  ;/* when i make login or register */
-            state.currentUser=action.payload?.user?.username|| action.payload?.data?.username
-            state.firstName=action.payload.user.firstName||action.payload?.data?.firstName;
-            state.lastName=action.payload.user.lastName;
-            state.email=action.payload.user.email;
-            state.isAdmin=action.payload.user.isAdmin;
-            state.id=action.payload.user._id;
+            state.token = action.payload.token  ;/* when i make login or register */
+            state.currentUser = action.payload?.user?.username|| action.payload?.data?.username
+            state.firstName = action.payload?.user?.firstName||action.payload?.data?.firstName;
+            state.lastName = action.payload?.user?.lastName || action.payload?.data?.lastName 
+            state.email = action.payload?.user?.email ||action.payload?.data?.email
+            state.isAdmin = action.payload?.user?.isAdmin;
+            state.id = action.payload?.user?._id;
 
 
           }
