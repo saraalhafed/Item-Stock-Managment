@@ -3,7 +3,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { deleteCategory, getCategories } from '../store/categories';
+import { categoriesActions } from '../store/categories';
 import { useState } from 'react';
 import {
   Box,
@@ -23,12 +23,12 @@ import CategoryModal from '../components/Modals/CategoryModal';
 const Categories = () =>{
 const [open,setOpen]=useState(false);/* to open the modal */
 const [edit,setEdit]=useState(false);
-
+const [modalValues, setModalValues] = useState({});/* to clooect all the input values inside the modal way1 props ,so we need a state for each page each modal  */
   const categories = useSelector((state)=>(state.categories.data))/* get all the categories data from api from slice  */
   // when this page is loaded we need to get all categories from the server
   const dispatch=useDispatch();
   useEffect(()=>{
-    dispatch(getCategories())
+    dispatch(categoriesActions.getData());
   },[])      /*  getcategories trigger once at runnig the App */
   /* now we have access to all the data inside each categories,_id..,name.. */
   const openModal=()=>{
@@ -39,6 +39,19 @@ const [edit,setEdit]=useState(false);
     setOpen(false);
     setEdit(false);
      }
+     const handleEdit = (category) => {
+      setEdit(true);
+      setOpen(true);
+      // we need to pass the data to our modal that we want to update
+      // we use 2 different methods
+      // 1. dispatch(setModalData)
+      // 2. setModalValues
+      // way-1
+      dispatch(uiActions.setModalData(category));
+      // way-2
+      setModalValues(category);
+    };
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" p={5}>
@@ -70,10 +83,13 @@ const [edit,setEdit]=useState(false);
                                 <TableCell align='center'>{category.name}</TableCell>
                                 <TableCell align='center'>0</TableCell> {/* products number */}
                                 <TableCell align='center'>
-                                  <EditIcon   sx={{ color: 'goldenrod', cursor: 'pointer', mx: 1 }}/>
+                                  <EditIcon   sx={{ color: 'goldenrod', cursor: 'pointer', mx: 1 }}
+                                   onClick={() => handleEdit(category)}/>
                                     <DeleteOutlineIcon
                                            sx={{ color: 'red', cursor: 'pointer', mx: 1 }}
-                                           onClick={()=>dispatch(deleteCategory(category._id))}
+                                           onClick={() =>
+                                            dispatch(categoriesActions.deleteData(category._id))
+                                          }
                                                 /* we have the access to id because we get all the categories from useeffect */
                                    />
                                 </TableCell>
@@ -82,7 +98,12 @@ const [edit,setEdit]=useState(false);
                     </TableBody>
                    </Table>
            </TableContainer>
-           <CategoryModal open={open} closeModal={closeModal} edit={edit}/>
+           <CategoryModal
+            open={open} 
+           closeModal={closeModal}
+           edit={edit}
+            // if we go for way-2 we need to pass this state as a prop
+          modalValues={modalValues}/>
       </Container>
     </Box>
   )

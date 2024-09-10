@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 
 const token = sessionStorage.getItem('token');
 
-const sliceUrl = `${config.BASE_URL}/categories`;
-const toastMessageTag = 'Category';
-const sliceName = 'categories';
+const sliceUrl = `${config.BASE_URL}/brands`;
+const toastMessageTag = 'Brand';
+const sliceName = 'brands';
 
 const slice = createSlice({
   name: sliceName,
@@ -204,8 +204,8 @@ const getSingleData = async (id) => {
   }
 };
 
-export const categoriesReducer = slice.reducer;
-export const categoriesActions = {
+export const brandsReducer = slice.reducer;
+export const brandsActions = {
   getData,
   createData,
   deleteData,

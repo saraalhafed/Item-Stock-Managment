@@ -5,7 +5,7 @@ export const ModalInput = ({name,label}) => {
   return (
     <Field
      type="text"
-     name={name}
+     name={name} /* key:value, key to send to the backend , value it will be in inputlable in the productModal or categorymodal.. */
      label={label}
      variant="outlined"
   required

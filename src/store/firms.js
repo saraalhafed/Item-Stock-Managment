@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 
 const token = sessionStorage.getItem('token');
 
-const sliceUrl = `${config.BASE_URL}/categories`;
-const toastMessageTag = 'Category';
-const sliceName = 'categories';
+const sliceUrl = `${config.BASE_URL}/firms`;
+const toastMessageTag = 'Firm';
+const sliceName = 'firms';
 
 const slice = createSlice({
   name: sliceName,
@@ -133,9 +133,9 @@ const deleteData = (id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
     if (error.status === 403) {
-      toast.error(error.response.data.details);
+      toast.error(error.response.data.details); /* body writ wrong */
     } else {
-      toast.error(error.response.data?.message || error.message);
+      toast.error(error.response.data?.message || error.message);  
     }
   }
 };
@@ -143,19 +143,20 @@ const deleteData = (id) => async (dispatch) => {
 // update category
 const editData = (input) => async (dispatch) => {
   try {
-    // here we get the latest version of the data we want to update
+    // here we 1- get the latest version of the data we want to update
     const latestDataFromAPI = await getSingleData(input._id);
 
-    // this is to check if the data we want to update has been updated by another user
+    // this is to 2-check if the data we want to update has been updated by another user
     // to do so we use the updatedAt field
     // updatedAt field will always be different if the data has been updated by another user
+    /* if the input is updat than we compare with others update  (for in api default firm  has  no apdate field so ) */
     if (input?.updatedAt && latestDataFromAPI.updatedAt !== input.updatedAt) {
       // warn the user about this change
-      const confirm = window.confirm(
+      const confirm = window.confirm( /* ok means our update will apear  */
         'This data has been updated by another user. Are you sure you want to edit it?'
       );
       // if the user doesn't want to edit the data, we don't want to update it
-      if (!confirm) return;
+      if (!confirm) return; /* cansel others update will apear */
     }
     // console.log(latestDataFromAPI);
     const url = `${sliceUrl}/${input._id}`;
@@ -204,10 +205,10 @@ const getSingleData = async (id) => {
   }
 };
 
-export const categoriesReducer = slice.reducer;
-export const categoriesActions = {
+export const firmsReducer = slice.reducer;
+export const firmsActions = {
   getData,
   createData,
   deleteData,
   editData,
-};
+}; 
