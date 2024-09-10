@@ -7,4 +7,6 @@ pnpm add @mui/material @emotion/react @emotion/styled
 
 pnpm add @mui/icons-material
 
-pnpm i @reduxjs/toolkit react-redux     
+pnpm i @reduxjs/toolkit react-redux  ,
+the project hase :
+differant pages,
