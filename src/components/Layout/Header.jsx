@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {toggleMenu, uiActions} from "../../store/ui"
+import { uiActions} from "../../store/ui"
 import MenuIcon from '@mui/icons-material/Menu';
 import PasswordIcon from '@mui/icons-material/Password';
 import LogoutIcon from '@mui/icons-material/Logout';

@@ -30,6 +30,7 @@ export default function Products() {
     setOpen(true);
     dispatch(productsActions.updat)
   }
+  
   return (
     <div>Products</div>
   )

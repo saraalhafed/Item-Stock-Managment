@@ -4,7 +4,7 @@ import{Login,Register,Brand ,Categories,
   Dashboard, Firms , Products,Profile,Purchases ,Sales}from "./pages"
 import { Route } from 'react-router-dom'
 import PrivateRoutes from './PrivateRoutes'
-import Layout from "./components/Layout"
+import Layout from "./components/Layout/Layout"
 export default function App() {
   return (
   <Routes>
