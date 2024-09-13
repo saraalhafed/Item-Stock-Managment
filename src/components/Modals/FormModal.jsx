@@ -3,7 +3,7 @@ import React from 'react'
 import style from './style'
 import { Field, Form, Formik } from 'formik'
 import ModalInput from './ModalInput'
-
+import  PropTypes  from 'prop-types';
  const FormModal = ({open,initialValues,handleClose,handleSubmit,inputLabels,title,arrayData}) => {
   
   return (

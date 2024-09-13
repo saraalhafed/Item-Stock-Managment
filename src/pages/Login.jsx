@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import InputForm from '../components/InputForm';
+
 import LoginRegisterComponent from '../components/LoginRegisterComponent';
 import PasswordForm from '../components/PasswordForm';
 import { login} from '../store/authSlice';
-y
+
 const Login = () => {
   const inputLabels = [
     { name: 'email', label: 'Email', Component: InputForm },

@@ -1,5 +1,5 @@
 
-import { FormModal } from './FormModal'
+import  FormModal from "./FormModal"
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { uiActions } from '../../store/ui';
@@ -25,7 +25,7 @@ const modalData = useSelector((state)=>state.ui.modalData)/* way2 with store mor
     : // modalValues is a prop that we passed from the parent component to implement way-2
       // modalData is state in our Redux shop to implement way-1
       {
-        name: '',
+        name: ''
       };
 
 const handleSubmit = (values, actions) => {

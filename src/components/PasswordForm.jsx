@@ -1,12 +1,12 @@
 import { TextField } from '@mui/material';
 import { Field } from 'formik';
-import PropTypes from 'prop-types';
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
 import { InputAdornment } from '@mui/material';
 import { IconButton } from '@mui/material';
-
+import  PropTypes  from 'prop-types';
 
 const PasswordForm = ({ name, label, errors, touched }) => {
     

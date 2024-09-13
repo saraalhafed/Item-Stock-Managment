@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 
 const token = sessionStorage.getItem('token');
 
-const sliceUrl = `${config.BASE_URL}/purchases`;/* from api */
-const toastMessageTag = 'Purchases';
-const sliceName = 'purchases';  /* smalletter  */
+const sliceUrl = `${config.BASE_URL}/purchases`;
+const toastMessageTag = 'Purchase';
+const sliceName = 'purchases';
 
 const slice = createSlice({
   name: sliceName,
@@ -68,22 +68,13 @@ const getData = () => async (dispatch) => {
 
     dispatch(slice.actions.set(data.data));
   } catch (error) {
-   // console.log(error);
-    //if (error.status === 403) {
-      // this is not same all the time. It depends on the API response structure
-      // To provide a more detailed error message, you need to check the API response structure
-      // and provide a more detailed error message
-     // toast.error(error.response.data.details);
-   // } else {
-      // this is not same all the time. It depends on the API response structure
-    //  toast.error(error.response.data?.message || error.message); // error.message will always exist and you can always use it.
-   // }
-   console.log(error);
-   toast.error(
-     error.response.data?.details ||
-       error.response.data?.message ||
-       error.message
-   );
+    console.log(error);
+    console.log(error);
+    toast.error(
+      error.response.data?.details ||
+        error.response.data?.message ||
+        error.message
+    );
   }
 };
 
@@ -117,9 +108,7 @@ const createData = (input) => async (dispatch) => {
         error.response.data?.message ||
         error.message
     );
-      // error.message will always exist and you can always use it.
-    
-  
+  }
 };
 
 // delete category
@@ -211,7 +200,7 @@ const getSingleData = async (id) => {
     );
   }
 };
-}
+
 export const purchasesReducer = slice.reducer;
 export const purchasesActions = {
   getData,
