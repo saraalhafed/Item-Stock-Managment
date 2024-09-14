@@ -3,57 +3,34 @@ import FormModal from './FormModal';
 import { useSelector } from 'react-redux';
 import { uiActions } from '../../store/ui';
 
-
-import { purchasesActions } from '../../store/purchases';
+import { brandsActions } from '../../store/brands';
 
 const inputLabels = [
   {
-    name: 'firmId',
-    label: 'Firm',
-    arrayName: 'firms',
+    name: 'name', /* check postman ,like api */
+    label: 'Brand Name',
   },
   {
-    name: 'productId',
-    label: 'Product',
-    arrayName: 'products',
-  },
-  {
-    name: 'quantity',
-    label: 'Quantity',
-  },
-  {
-    name: 'price',
-    label: 'Price',
+    name: 'image',
+    label: 'Brand Image',
   },
 ];
 
 const initialState = {
-  firmId: '',
-  productId: '',
-  quantity: '',
-  price: '',
+  name: '',
+  image: '',
 };
-const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
+const BrandModal = ({ open, closeModal, edit, modalValues }) => {
   const dispatch = useDispatch();
   const modalData = useSelector((state) => state.ui.modalData);
 
   const initialValues = edit ? modalData : initialState;
 
-  const firms = useSelector((state) => state.firms.data);
-  const products = useSelector((state) => state.products.data);
-
-  // console.log(brands);
-
-  const arrayData = {
-    firms,
-    products,
-  };
-
   const handleSubmit = (values, actions) => {
     if (edit) {
-      dispatch(purchasesActions.editData(values));
+      dispatch(brandsActions.editData(values));
     } else {
-      dispatch(purchasesActions.createData(values));
+      dispatch(brandsActions.createData(values));
     }
     actions.resetForm();
     actions.setSubmitting(false);
@@ -71,10 +48,10 @@ const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
       handleSubmit={handleSubmit}
       handleClose={handleClose}
       inputLabels={inputLabels}
-      title={edit ? 'Edit Purchase' : 'New Purchase'}
-      arrayData={arrayData}
+      title={edit ? 'Edit Brand' : 'New Brand'}
+      arrayData={null}
     />
   );
 };
 
-export default PurchaseModal;
+export default BrandModal;

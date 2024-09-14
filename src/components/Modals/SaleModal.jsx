@@ -1,17 +1,10 @@
-import { useDispatch } from 'react-redux';
-import FormModal from './FormModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { uiActions } from '../../store/ui';
-
-
-import { purchasesActions } from '../../store/purchases';
+import FormModal from './FormModal';
+import { salesActions } from '../../store/sales';
 
 const inputLabels = [
-  {
-    name: 'firmId',
-    label: 'Firm',
-    arrayName: 'firms',
-  },
   {
     name: 'productId',
     label: 'Product',
@@ -28,32 +21,29 @@ const inputLabels = [
 ];
 
 const initialState = {
-  firmId: '',
   productId: '',
   quantity: '',
   price: '',
 };
-const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
+const SaleModal = ({ open, closeModal, edit, modalValues }) => {
   const dispatch = useDispatch();
   const modalData = useSelector((state) => state.ui.modalData);
 
   const initialValues = edit ? modalData : initialState;
 
-  const firms = useSelector((state) => state.firms.data);
   const products = useSelector((state) => state.products.data);
 
   // console.log(brands);
 
   const arrayData = {
-    firms,
     products,
   };
 
   const handleSubmit = (values, actions) => {
     if (edit) {
-      dispatch(purchasesActions.editData(values));
+      dispatch(salesActions.editData(values));
     } else {
-      dispatch(purchasesActions.createData(values));
+      dispatch(salesActions.createData(values));
     }
     actions.resetForm();
     actions.setSubmitting(false);
@@ -71,10 +61,10 @@ const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
       handleSubmit={handleSubmit}
       handleClose={handleClose}
       inputLabels={inputLabels}
-      title={edit ? 'Edit Purchase' : 'New Purchase'}
+      title={edit ? 'Edit Sale' : 'New Sale'}
       arrayData={arrayData}
     />
   );
 };
 
-export default PurchaseModal;
+export default SaleModal;

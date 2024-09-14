@@ -3,57 +3,42 @@ import FormModal from './FormModal';
 import { useSelector } from 'react-redux';
 import { uiActions } from '../../store/ui';
 
-
-import { purchasesActions } from '../../store/purchases';
+import { firmsActions } from '../../store/firms';
 
 const inputLabels = [
   {
-    name: 'firmId',
-    label: 'Firm',
-    arrayName: 'firms',
+    name: 'name', /* check postman ,like api */
+    label: 'Firm Name',
   },
   {
-    name: 'productId',
-    label: 'Product',
-    arrayName: 'products',
+    name: 'image',
+    label: 'Firm Image',
   },
-  {
-    name: 'quantity',
-    label: 'Quantity',
+  {name:"address",
+    label: " Address "
   },
-  {
-    name: 'price',
-    label: 'Price',
+  {name:"phone",
+    label: " Phone"
   },
 ];
 
 const initialState = {
-  firmId: '',
-  productId: '',
-  quantity: '',
-  price: '',
+  name: '',
+  image: '',
+  address:"",
+  phone:"",
 };
-const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
+const FirmModal = ({ open, closeModal, edit }) => {
   const dispatch = useDispatch();
   const modalData = useSelector((state) => state.ui.modalData);
 
   const initialValues = edit ? modalData : initialState;
 
-  const firms = useSelector((state) => state.firms.data);
-  const products = useSelector((state) => state.products.data);
-
-  // console.log(brands);
-
-  const arrayData = {
-    firms,
-    products,
-  };
-
   const handleSubmit = (values, actions) => {
     if (edit) {
-      dispatch(purchasesActions.editData(values));
+      dispatch(firmsActions.editData(values));
     } else {
-      dispatch(purchasesActions.createData(values));
+      dispatch(firmsActions.createData(values));
     }
     actions.resetForm();
     actions.setSubmitting(false);
@@ -71,10 +56,10 @@ const PurchaseModal = ({ open, closeModal, edit, modalValues }) => {
       handleSubmit={handleSubmit}
       handleClose={handleClose}
       inputLabels={inputLabels}
-      title={edit ? 'Edit Purchase' : 'New Purchase'}
-      arrayData={arrayData}
+      title={edit ? 'Edit Firm' : 'New Firm'}
+      arrayData={null}
     />
   );
 };
 
-export default PurchaseModal;
+export default FirmModal;
